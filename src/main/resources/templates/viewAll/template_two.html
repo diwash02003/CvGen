@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Modern Resume - John Smith</title>
+    <style>
+        /* Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --text-color: #333;
+            --light-text: #666;
+            --border-color: #eaeaea;
+            --background: #fff;
+            --section-spacing: 28px;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background: #f0f2f5;
+            color: #2c3e50;
+            line-height: 1.5;
+        }
+
+        a {
+            color: #2980b9;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            background: var(--background);
+            box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            position: relative;
+        }
+
+        /* Container */
+        .resume-container {
+            max-width: 900px;
+            margin: 40px auto;
+            background: #fff;
+            display: flex;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        /* Left Sidebar */
+        .sidebar {
+            background: #34495e;
+            color: #ecf0f1;
+            width: 280px;
+            padding: 30px 25px;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .back-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .back-btn:hover {
+            background-color: #1a2530;
+        }
+        .sidebar h2 {
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #2980b9;
+            padding-bottom: 8px;
+        }
+
+        .profile-pic {
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            object-fit: cover;
+            border: 4px solid #2980b9;
+        }
+
+        .contact-info {
+            font-size: 14px;
+            line-height: 1.4;
+        }
+
+        .contact-item {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-item i {
+            font-style: normal;
+            font-weight: 700;
+            color: #2980b9;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        /* Skills */
+        .skills-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .skill {
+            font-weight: 600;
+            margin-bottom: 6px;
+        }
+
+        .skill-bar {
+            height: 8px;
+            background: #2c3e50;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .skill-level {
+            height: 8px;
+            background: #2980b9;
+            border-radius: 5px 0 0 5px;
+        }
+
+        /* Education */
+        .education-item {
+            margin-bottom: 20px;
+        }
+
+        .education-item h4 {
+            font-weight: 700;
+            margin-bottom: 3px;
+            font-size: 15px;
+            color: #ecf0f1;
+        }
+
+        .education-item p {
+            font-size: 13px;
+            color: #bdc3c7;
+            margin-bottom: 2px;
+        }
+
+        /* Right Content */
+        .main-content {
+            flex-grow: 1;
+            padding: 35px 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 35px;
+        }
+
+        .main-header {
+            border-bottom: 3px solid #2980b9;
+            padding-bottom: 10px;
+        }
+
+        .name {
+            font-size: 36px;
+            font-weight: 800;
+            color: #2c3e50;
+            letter-spacing: 3px;
+        }
+
+        .title {
+            font-size: 18px;
+            font-weight: 500;
+            color: #2980b9;
+            margin-top: 5px;
+        }
+
+        /* Summary */
+        .section {
+            font-size: 16px;
+            color: #34495e;
+        }
+
+        .section h3 {
+            font-weight: 700;
+            color: #2980b9;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #2980b9;
+            padding-bottom: 6px;
+            letter-spacing: 1.2px;
+        }
+
+        /* Experience */
+        .experience-item {
+            margin-bottom: 25px;
+        }
+
+        .experience-item h4 {
+            font-weight: 700;
+            font-size: 18px;
+            margin-bottom: 4px;
+        }
+
+        .experience-meta {
+            font-style: italic;
+            color: #7f8c8d;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .experience-desc {
+            font-size: 15px;
+            line-height: 1.5;
+            color: #2c3e50;
+        }
+
+        .experience-desc ul {
+            margin-top: 8px;
+            padding-left: 20px;
+        }
+
+        .experience-desc li {
+            margin-bottom: 6px;
+        }
+
+        /* Projects */
+        .projects-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .projects-list li {
+            margin-bottom: 12px;
+        }
+
+        .projects-list strong {
+            color: #2980b9;
+        }
+
+        /* Responsive */
+        @media (max-width: 720px) {
+            .resume-container {
+                flex-direction: column;
+                width: 90%;
+            }
+
+            .sidebar {
+                width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                padding: 20px 15px;
+                gap: 20px;
+            }
+
+            .profile-pic {
+                margin: 0 0 0 0;
+            }
+
+            .main-content {
+                padding: 20px 15px;
+            }
+
+            .skills-list {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 10px;
+            }
+
+            .skill {
+                flex: 1 1 45%;
+            }
+        }
+    </style>
+    <link
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+            rel="stylesheet"
+    />
+</head>
+<body>
+<div class="container">
+    <div class="back-nav">
+        <a href="/basic-info">
+            <button class="back-btn"><i class="fas fa-arrow-left"></i> Back</button>
+        </a>
+    </div>
+
+    <div class="resume-container" role="main">
+
+        <aside class="sidebar" aria-label="Contact Information and Skills">
+            <img
+                    src="https://randomuser.me/api/portraits/women/44.jpg"
+                    alt="John Smith"
+                    class="profile-pic"
+            />
+            <div>
+                <h2>Contact</h2>
+                <div class="contact-info">
+                    <div class="contact-item"><i class="fas fa-envelope"></i> john.smith@example.com</div>
+                    <div class="contact-item"><i class="fas fa-phone"></i> +1 555-987-6543</div>
+                    <div class="contact-item"><i class="fas fa-map-marker-alt"></i> Boston, MA</div>
+                    <div class="contact-item"><i class="fab fa-linkedin"></i> linkedin.com/in/johnsmith</div>
+                    <div class="contact-item"><i class="fab fa-github"></i> github.com/johnsmith</div>
+                </div>
+
+                <h2>Skills</h2>
+                <ul class="skills-list" aria-label="Skills List">
+                    <li>
+                        <div class="skill">JavaScript</div>
+
+                    </li>
+                    <li>
+                        <div class="skill">React</div>
+
+                    </li>
+                    <li>
+                        <div class="skill">Node.js</div>
+
+                    </li>
+                    <li>
+                        <div class="skill">Spring Boot</div>
+
+                    </li>
+                    <li>
+                        <div class="skill">Docker</div>
+
+                    </li>
+                </ul>
+
+                <h2>Education</h2>
+                <div class="education-item">
+                    <h4>BSc Computer Science</h4>
+                    <p>University of Boston</p>
+                    <p>2016 - 2020</p>
+                </div>
+                <div class="education-item">
+                    <h4>High School Diploma</h4>
+                    <p>Boston High School</p>
+                    <p>2012 - 2016</p>
+                </div>
+            </div>
+        </aside>
+
+        <section class="main-content" aria-label="Main Resume Content">
+            <header class="main-header">
+                <h1 class="name">John Smith</h1>
+                <p class="title">Full Stack Developer</p>
+            </header>
+
+            <section class="section summary">
+                <h3>Summary</h3>
+                <p>
+                    Passionate Full Stack Developer with 4+ years of experience building
+                    scalable web applications using JavaScript, React, Node.js, and
+                    Spring Boot. Strong problem-solving skills and keen on writing clean,
+                    maintainable code.
+                </p>
+            </section>
+
+            <section class="section experience" aria-label="Work Experience">
+                <h3>Experience</h3>
+                <article class="experience-item">
+                    <h4>Senior Developer - Tech Solutions Inc.</h4>
+                    <div class="experience-meta">Boston, MA | Jan 2022 – Present</div>
+                    <div class="experience-desc">
+                        <ul>
+                            <li>Led a team of 5 developers to build an enterprise CRM system.</li>
+                            <li>Developed RESTful APIs with Spring Boot and integrated React frontend.</li>
+                            <li>Optimized application performance and reduced load times by 30%.</li>
+                        </ul>
+                    </div>
+                </article>
+
+                <article class="experience-item">
+                    <h4>Full Stack Developer - WebWorks</h4>
+                    <div class="experience-meta">Boston, MA | Jun 2020 – Dec 2021</div>
+                    <div class="experience-desc">
+                        <ul>
+                            <li>Built e-commerce platforms with React and Node.js backend.</li>
+                            <li>Implemented authentication and role-based access control.</li>
+                            <li>Collaborated with designers to improve UI/UX.</li>
+                        </ul>
+                    </div>
+                </article>
+            </section>
+
+            <section class="section projects" aria-label="Projects">
+                <h3>Projects</h3>
+                <ul class="projects-list">
+                    <li><strong>Portfolio Website:</strong> A personal portfolio built with React and hosted on GitHub
+                        Pages.
+                    </li>
+                    <li><strong>Task Manager API:</strong> RESTful API built with Spring Boot to manage tasks and
+                        projects.
+                    </li>
+                    <li><strong>Chat App:</strong> Real-time chat application using Node.js and Socket.io.</li>
+                </ul>
+            </section>
+        </section>
+    </div>
+</div>
+</body>
+</html>

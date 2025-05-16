@@ -1,6 +1,7 @@
 package com.cvgenerator.cvg.utils;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -14,22 +15,34 @@ import java.util.UUID;
 @Component
 public class FileStoreUtils {
 
+    @Value("${upload.dir}")
+    private String uploadDir;
+
     public String uploadFile(MultipartFile photoFile) {
         try {
             log.info("Starting file upload ... ");
-            String directoryPath = System.getProperty("user.home") + File.separator + "cv_gen";
+            // Get the path of the JAR file's directory
+            String jarDir = new File(System.getProperty("user.dir")).getAbsolutePath();
+            String directoryPath = jarDir + File.separator + uploadDir;
+            // Ensure the directory exists
             File directoryFile = new File(directoryPath);
             if (!directoryFile.exists()) {
                 directoryFile.mkdirs();
+                log.info("Directory created: {}", directoryPath);
             } else {
-                log.info("Directory already exists");
+                log.info("Directory already exists: {}", directoryPath);
             }
-            String photoFilePath = directoryPath + File.separator + UUID.randomUUID() + "_" + photoFile.getOriginalFilename();
+
+            // Create a unique file name
+            String fileName = UUID.randomUUID() + "_" + photoFile.getOriginalFilename();
+            String photoFilePath = directoryPath + File.separator + fileName;
             File photo = new File(photoFilePath);
+            // Save the file
             photoFile.transferTo(photo);
+            log.info("File uploaded successfully: {}", photoFilePath);
             return photoFilePath;
         } catch (IOException e) {
-            e.printStackTrace();
+            log.error("File upload failed: ", e);
             return null;
         }
     }

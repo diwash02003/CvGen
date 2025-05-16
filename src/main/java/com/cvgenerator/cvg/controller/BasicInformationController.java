@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("basic-info")
@@ -83,6 +84,4 @@ public class BasicInformationController {
         basicInformationService.deleteById(basicInformationId);
         return "redirect:/basic-info";
     }
-
-
 }

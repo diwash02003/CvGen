@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Show Both Templates</title>
+    <style>
+        /* Reset some default */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f9fafb;
+            color: #333;
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .template-container {
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 2rem 3rem;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .template-button {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        a.btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
+            text-decoration: none;
+            padding: 0.75rem 1.5rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
+            border: 2px solid #17a2b8;
+            color: #17a2b8;
+            background-color: #e0f7fa;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        a.btn:hover, a.btn:focus {
+            background-color: #17a2b8;
+            color: white;
+            box-shadow: 0 6px 12px rgba(23, 162, 184, 0.5);
+        }
+
+        i.fas {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+<div class="template-container">
+    <div class="template-button">
+        <a th:href="@{~/templates/one}" class="btn btn-info" aria-label="View Template One">
+            <i class="fas fa-file-alt" aria-hidden="true"></i> View Template One
+        </a>
+        <a th:href="@{~/templates/two}" class="btn btn-info" aria-label="View Template Two">
+            <i class="fas fa-file-alt" aria-hidden="true"></i> View Template Two
+        </a>
+    </div>
+</div>
+</body>
+</html>

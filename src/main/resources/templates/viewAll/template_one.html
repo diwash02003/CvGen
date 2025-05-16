@@ -90,19 +90,17 @@
         }
 
         .contact-info {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 15px;
+            display: block;
+            text-align: center;
             margin-bottom: 15px;
-            font-size: 15px;
-            color: var(--light-text);
         }
 
         .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
+            display: block;
+            margin: 5px 0;
+            padding: 2px 0;
+            font-size: 15px;
+            color: var(--light-text);
         }
 
         .social-links {
@@ -343,6 +341,7 @@
                 display: none;
             }
         }
+
         /* Education Section */
         .education-item {
             margin-bottom: 22px;
@@ -351,13 +350,6 @@
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
-        /*.item-header {*/
-        /*    display: flex;*/
-        /*    justify-content: space-between;*/
-        /*    align-items: center;*/
-        /*    margin-bottom: 5px;*/
-        /*}*/
 
         .degree {
             font-weight: 600;
@@ -417,134 +409,159 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <!-- Back Button -->
-    <div class="back-nav">
-        <a th:href="@{~/basic-info}">
-            <button class="back-btn"><i class="fas fa-arrow-left"></i> Back</button>
-        </a>
-    </div>
-
-    <!-- Header Section -->
-    <header class="header" th:if="${basicInformationDto != null}">
-        <h1 class="name" th:text="${basicInformationDto.firstName} + ' ' + ${basicInformationDto.lastName}"></h1>
-        <p class="profession" th:if="${experienceDto != null and not #lists.isEmpty(experienceDto)}"
-           th:text="${experienceDto[0].position}"></p>
-
-        <div class="contact-info">
-            <div class="contact-item" th:if="${basicInformationDto.currentAddress}">
-                <i class="fas fa-map-marker-alt"></i>
-                <span th:text="${basicInformationDto.currentAddress}"></span>
-            </div>
-
-            <div class="contact-item"
-                 th:if="${reachMeAtDto != null and !#lists.isEmpty(reachMeAtDto)}"
-                 th:each="contact : ${reachMeAtDto}">
-                <i class="fas fa-envelope" th:if="${contact.details != null and contact.details.contains('@')}"></i>
-                <i class="fas fa-phone" th:unless="${contact.details != null and contact.details.contains('@')}"></i>
-                <span th:text="${contact.details}"></span>
-            </div>
+<div th:fragment="content">
+    <div class="container">
+        <!-- Back Button -->
+        <div class="back-nav">
+            <a href="/basic-info">
+                <button class="back-btn"><i class="fas fa-arrow-left"></i> Back</button>
+            </a>
         </div>
 
-        <!-- Social Links (if available) -->
-        <div class="social-links">
-            <!-- Example social links - modify based on your data -->
-            <!-- <a href="#" class="social-link" target="_blank"><i class="fas fa-globe"></i> website.com</a> -->
-            <!-- <a href="#" class="social-link" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a> -->
-            <!-- <a href="#" class="social-link" target="_blank"><i class="fab fa-github"></i> GitHub</a> -->
-        </div>
-    </header>
+        <!-- Header Section -->
+        <header class="header">
+            <h1 class="name">JANE DOE</h1>
+            <p class="profession">Senior Software Engineer</p>
 
-    <!-- Summary Section (if available) -->
-    <section class="summary" th:if="${basicInformationDto != null}">
-        <p th:text="${basicInformationDto.background}"></p>
-    </section>
-
-    <!-- Experience Section -->
-    <section class="section" th:if="${experienceDto != null and not #lists.isEmpty(experienceDto)}">
-        <h2 class="section-title">Experience</h2>
-
-        <div th:each="experience : ${experienceDto}" class="experience-item">
-            <div class="item-header">
-                <h3 class="position" th:text="${experience.position}"></h3>
-                <span class="location" th:text="${experience.address}"></span>
+            <div class="contact-info">
+                <div class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>jane.doe@example.com</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>+1 555-123-4567</span>
+                </div>
+                <div class="contact-item">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <span>New York, USA</span>
+                </div>
             </div>
+        </header>
 
-            <div class="company" th:text="${experience.companyName}"></div>
-            <div class="date" th:text="${experience.isCurrent ? 'Present' : ''}"></div>
+        <!-- Summary Section -->
+        <section class="summary">
+            <p>
+                Experienced software engineer with over 8 years of professional experience in developing scalable web
+                applications, leading agile teams, and architecting cloud-based solutions. Passionate about clean code,
+                continuous learning, and mentoring junior developers.
+            </p>
+        </section>
 
-            <div class="description">
-                <p th:text="${experience.jobRole}"></p>
+        <!-- Experience Section -->
+        <section class="section">
+            <h2 class="section-title">Experience</h2>
 
-                <!-- Projects related to this experience -->
-                <div class="projects-container"
-                     th:if="${experienceProjectsMap != null and experienceProjectsMap[experience.experienceId] != null and not #lists.isEmpty(experienceProjectsMap[experience.experienceId])}">
-                    <div th:each="project : ${experienceProjectsMap[experience.experienceId]}" class="project-in-exp">
-                        <div class="project-title" th:text="${project.projectName}"></div>
-                        <div class="project-role" th:text="${project.roleInProject}"></div>
-                        <div class="tech-stack">
-                            <strong>Tech Stack:</strong> <span th:text="${project.techStackUsed}"></span>
+            <div class="experience-item">
+                <div class="item-header">
+                    <h3 class="position">Senior Software Engineer</h3>
+                    <span class="location">New York, NY</span>
+                </div>
+
+                <div class="company">Tech Innovations Inc.</div>
+                <div class="date">Jan 2020 - Present</div>
+
+                <div class="description">
+                    <ul>
+                        <li>Led a team of 6 developers in building a SaaS platform serving 100k+ users.</li>
+                        <li>Designed microservices architecture and REST APIs for new product modules.</li>
+                        <li>Improved system performance by 30% through code optimization and caching.</li>
+                    </ul>
+
+                    <!-- Projects related to this experience -->
+                    <div class="projects-container">
+                        <div class="project-in-exp">
+                            <div class="project-title">Inventory Management System</div>
+                            <div class="project-role">Lead Developer</div>
+                            <div class="tech-stack">
+                                <strong>Tech Stack:</strong> Spring Boot, React, PostgreSQL, Docker, AWS
+                            </div>
+                        </div>
+
+                        <div class="project-in-exp">
+                            <div class="project-title">Real-time Analytics Dashboard</div>
+                            <div class="project-role">Backend Engineer</div>
+                            <div class="tech-stack">
+                                <strong>Tech Stack:</strong> Node.js, WebSockets, MongoDB
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
 
-    <section class="section" th:if="${educationInformationDto != null and not #lists.isEmpty(educationInformationDto)}">
-        <h2 class="section-title">Education</h2>
+            <div class="experience-item">
+                <div class="item-header">
+                    <h3 class="position">Software Engineer</h3>
+                    <span class="location">San Francisco, CA</span>
+                </div>
 
-        <div th:each="education : ${educationInformationDto}" class="education-item">
-            <div class="education-item-header">
-                <h3 class="degree" th:text="${education.level}"></h3>
-                <span class="level-detail" th:text="${education.levelDetail}"></span>
-                <span class="date-range">
-                <span th:text="'From: ' + ${education.getFromYearDate()}"></span> -
-                <span th:text="${education.isRunning ? 'Currently Studying' : 'To: ' + education.getToYearDate()}"></span>
-            </span>
+                <div class="company">NextGen Software Solutions</div>
+                <div class="date">Jun 2016 - Dec 2019</div>
+
+                <div class="description">
+                    <ul>
+                        <li>Developed web applications for enterprise clients using Java and Angular.</li>
+                        <li>Collaborated with cross-functional teams to define project requirements and deliverables.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section class="section">
+            <h2 class="section-title">Education</h2>
+
+            <div class="education-item">
+                <div class="education-item-header">
+                    <h3 class="degree">Bachelor of Science in Computer Science</h3>
+                    <span class="level-detail">Graduated with Honors</span>
+                    <span class="date-range">
+                    <span>From: 2012</span> -
+                    <span>To: 2016</span>
+                </span>
+                </div>
+
+                <div class="institution">University of California, Berkeley</div>
             </div>
 
-            <div class="institution" th:text="${education.instituteName}"></div>
-        </div>
-    </section>
+            <div class="education-item">
+                <div class="education-item-header">
+                    <h3 class="degree">High School Diploma</h3>
+                    <span class="level-detail">GPA: 3.9 / 4.0</span>
+                    <span class="date-range">
+                    <span>From: 2008</span> -
+                    <span>To: 2012</span>
+                </span>
+                </div>
 
-
-    <!-- Projects Section (if not already included in experience) -->
-<!--    <section class="section" th:if="${experienceProjectsMap != null and not #maps.isEmpty(experienceProjectsMap)}">-->
-<!--        <h2 class="section-title">Projects</h2>-->
-
-<!--        <div th:each="entry : ${experienceProjectsMap}" th:if="${not #lists.isEmpty(entry.value)}">-->
-<!--            <div th:each="project : ${entry.value}" class="project-item">-->
-<!--                <div class="item-header">-->
-<!--                    <h3 class="project-name" th:text="${project.projectName}"></h3>-->
-<!--                </div>-->
-
-<!--                <div class="company" th:text="${project.roleInProject}"></div>-->
-
-<!--                <div class="description">-->
-<!--                    <p th:text="${project.techStackUsed}"></p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </section>-->
-
-    <!-- Skills Section -->
-    <section class="section" th:if="${skillDto != null and not #lists.isEmpty(skillDto)}">
-        <h2 class="section-title">Skills</h2>
-
-        <div class="skills-container">
-            <div th:each="skill : ${skillDto}" class="skill-item">
-                <h3 class="skill-name" th:text="${skill.skillName}"></h3>
-                <p class="skill-description" th:text="${skill.skillDescription}"></p>
+                <div class="institution">Lincoln High School, San Francisco</div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Download Button -->
-    <div class="download-container">
-        <a th:href="@{|~/view-all/downloadCvInPdf/${basicInformationId}|}" class="download-btn">
-            <i class="fas fa-download"></i> Download PDF
-        </a>
+        <!-- Skills Section -->
+        <section class="section">
+            <h2 class="section-title">Skills</h2>
+
+            <div class="skills-container">
+                <div class="skill-item">
+                    <h3 class="skill-name">Java & Spring Boot</h3>
+                    <p class="skill-description">Expert in backend development and REST API design.</p>
+                </div>
+                <div class="skill-item">
+                    <h3 class="skill-name">JavaScript & React</h3>
+                    <p class="skill-description">Proficient in building SPA with React, Redux, and modern tooling.</p>
+                </div>
+                <div class="skill-item">
+                    <h3 class="skill-name">Docker & Kubernetes</h3>
+                    <p class="skill-description">Experience containerizing applications and managing clusters.</p>
+                </div>
+                <div class="skill-item">
+                    <h3 class="skill-name">AWS Cloud</h3>
+                    <p class="skill-description">Skilled in deploying, scaling, and monitoring cloud infrastructure.</p>
+                </div>
+            </div>
+        </section>
     </div>
 </div>
 </body>

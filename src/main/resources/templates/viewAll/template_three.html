@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>Modern Resume</title>
+    <style>
+        /* Reset */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --text-color: #333;
+            --light-text: #666;
+            --border-color: #eaeaea;
+            --background: #fff;
+            --section-spacing: 28px;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7fa;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .resume-container {
+            max-width: 800px;
+            margin: 30px auto;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 5px;
+        }
+
+        .header p {
+            color: #555;
+        }
+
+        .section {
+            margin-bottom: 20px;
+        }
+
+        .section h2 {
+            color: #005f73;
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 5px;
+        }
+
+        .experience, .education {
+            margin-left: 20px;
+        }
+
+        .experience h3, .education h3 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .experience p, .education p {
+            color: #666;
+        }
+
+        .skills {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .skill {
+            background: #005f73;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
+
+        .back-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .back-btn:hover {
+            background-color: #1a2530;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 40px auto;
+            background: var(--background);
+            box-shadow: 0 1px 20px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="back-nav">
+        <a href="/basic-info">
+            <button class="back-btn"><i class="fas fa-arrow-left"></i> Back</button>
+        </a>
+    </div>
+    <div class="resume-container">
+        <div class="header">
+            <h1>John Doe</h1>
+            <p>Full Stack Developer | john.doe@example.com | (123) 456-7890</p>
+        </div>
+
+        <div class="section">
+            <h2>Summary</h2>
+            <p>Experienced developer with expertise in modern web technologies, building scalable applications, and
+                problem-solving. Passionate about coding and continuously learning.</p>
+        </div>
+
+        <div class="section">
+            <h2>Experience</h2>
+            <div class="experience">
+                <h3>Senior Developer at Tech Solutions</h3>
+                <p>Boston, MA | Jan 2022 – Present</p>
+                <p>Led a team to build scalable web applications and APIs using React and Node.js.</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Skills</h2>
+            <div class="skills">
+                <span class="skill">JavaScript</span>
+                <span class="skill">React</span>
+                <span class="skill">Node.js</span>
+                <span class="skill">Spring Boot</span>
+                <span class="skill">Docker</span>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Education</h2>
+            <div class="education">
+                <h3>BSc Computer Science</h3>
+                <p>University of Boston | 2016 - 2020</p>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

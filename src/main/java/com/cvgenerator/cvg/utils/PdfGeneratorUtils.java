@@ -1,43 +1,38 @@
 package com.cvgenerator.cvg.utils;
 
+import com.github.jhonnymertz.wkhtmltopdf.wrapper.Pdf;
+import com.github.jhonnymertz.wkhtmltopdf.wrapper.params.Param;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import org.xhtmlrenderer.pdf.ITextRenderer;
 
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
+
 
 @Slf4j
 @Component
 public class PdfGeneratorUtils {
 
     public static void generatePdfFromHtml(String htmlContent, String outputFileName) {
-        OutputStream outputStream = null;
         try {
-            outputStream = new FileOutputStream(outputFileName);
-
-            ITextRenderer renderer = new ITextRenderer();
-            renderer.setDocumentFromString(htmlContent);
-            renderer.layout();
-            renderer.createPDF(outputStream);
+            Pdf pdf = new Pdf();
+            pdf.addPageFromString(htmlContent);
+            pdf.addParam(new Param("--page-size", "A4"));
+            pdf.addParam(new Param("--margin-top", "15mm"));
+            pdf.addParam(new Param("--margin-bottom", "15mm"));
+            pdf.addParam(new Param("--margin-left", "10mm"));
+            pdf.addParam(new Param("--margin-right", "10mm"));
+            pdf.saveAs(outputFileName);
 
             log.info("PDF generated successfully at {}", outputFileName);
-        } catch (Exception e) {
+        } catch (IOException e) {
             log.error("Error generating PDF", e);
             throw new RuntimeException("Error generating PDF", e);
-        } finally {
-            if (outputStream != null) {
-                try {
-                    outputStream.close();
-                } catch (IOException e) {
-                    log.error("Error closing output stream", e);
-                }
-            }
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
         }
     }
 

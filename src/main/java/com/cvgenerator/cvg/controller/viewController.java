@@ -52,18 +52,19 @@ public class viewController {
 
         List<ExperienceDto> experienceDto = experienceService.findByBasicInformationId(basicInformationId);
         Map<Integer, List<ProjectsDto>> experienceProjectsMap = new HashMap<>();
-        for( ExperienceDto experience :experienceDto){
-            Integer experienceId= experience.getExperienceId();
+        for (ExperienceDto experience : experienceDto) {
+            Integer experienceId = experience.getExperienceId();
             List<ProjectsDto> projectDtoList = projectsService.findByExperienceId(experienceId);
-            experienceProjectsMap.put(experienceId,projectDtoList);
+            experienceProjectsMap.put(experienceId, projectDtoList);
         }
-        model.addAttribute("experienceDto",experienceDto);
+        model.addAttribute("experienceDto", experienceDto);
         model.addAttribute("experienceProjectsMap", experienceProjectsMap);
         return "viewAll/view_All";
     }
+
     @GetMapping("/skill-view/{basicInfoId}")
-    public String openSkillViewPage(@PathVariable("basicInfoId") Integer basicInfoId,Model model){
-        model.addAttribute("skillDto",skillService.findByBasicInformationId(basicInfoId));
+    public String openSkillViewPage(@PathVariable("basicInfoId") Integer basicInfoId, Model model) {
+        model.addAttribute("skillDto", skillService.findByBasicInformationId(basicInfoId));
         return "skill/skill_view";
     }
 
@@ -72,9 +73,7 @@ public class viewController {
         try {
             String message = "PDF generated successfully.";
 
-            // Adjust this according to your template name
             String templateName = "viewAll/download_view_page";
-            //calling function from  ViewPagePdfConverter class
             cvHtmlToPdf.generatePdf(basicInformationId, templateName);
             model.addAttribute("basicInformationDtoList", basicInformationService.findAll());
             model.addAttribute("message", message);
